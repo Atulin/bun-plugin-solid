@@ -3,33 +3,36 @@ import { transformAsync } from "@babel/core";
 import ts from "@babel/preset-typescript";
 // @ts-expect-error - Types not important.
 import solid from "babel-preset-solid";
-import { type BunPlugin } from "bun";
+import type { BunPlugin } from "bun";
 
 export interface SolidPluginOptions {
-  generate?: "dom" | "ssr";
-  hydratable?: boolean;
+	generate?: "dom" | "ssr";
+	hydratable?: boolean;
 }
 
 export function SolidPlugin(options: SolidPluginOptions = {}): BunPlugin {
-  return {
-    name: "bun-plugin-solid",
-    setup: (build) => {
-      build.onLoad({ filter: /\.(js|ts)x$/ }, async (args) => {
-        const { readFile } = await import("node:fs/promises");
-        const code = await readFile(args.path, "utf8");
-        const transforms = await transformAsync(code, {
-          filename: args.path,
-          presets: [
-            [solid, options],
-            [ts, {}],
-          ],
-        });
+	return {
+		name: "bun-plugin-solid",
+		setup: (build) => {
+			build.onLoad({ filter: /\.(js|ts)x$/ }, async (args) => {
+				const code = await Bun.file(args.path).text();
+				const transforms = await transformAsync(code, {
+					filename: args.path,
+					presets: [
+						[solid, options],
+						[ts, {}],
+					],
+				});
 
-        return {
-          contents: transforms!.code!,
-          loader: "js",
-        };
-      });
-    },
-  };
+				if (!transforms?.code) {
+					throw new Error("Code not generated");
+				}
+
+				return {
+					contents: transforms.code,
+					loader: "js",
+				};
+			});
+		},
+	};
 }

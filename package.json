@@ -1,53 +1,35 @@
 {
-  "name": "bun-plugin-solid",
-  "description": "A plugin to compile Solid.js with Bun.",
-  "version": "1.0.0",
-  "author": {
-    "name": "Atulin"
-  },
-  "license": "MIT",
-  "type": "module",
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "prepare": "tshy",
-    "publish": "changeset publish"
-  },
-  "dependencies": {
-    "@babel/core": "^7.26.10",
-    "@babel/preset-typescript": "*7.27.0",
-    "babel-preset-solid": "*1.9.5"
-  },
-  "devDependencies": {
-    "@types/babel__core": "^7.20.5",
-    "@changesets/cli": "^2.26.2",
-    "@typescript-eslint/eslint-plugin": "^6.10.0",
-    "@typescript-eslint/parser": "^6.10.0",
-    "bun-types": "latest",
-    "eslint": "^8.53.0",
-    "eslint-plugin-import": "^2.29.0",
-    "eslint-plugin-simple-import-sort": "^10.0.0",
-    "prettier": "^3.0.3",
-    "tshy": "^1.8.0",
-    "typescript": "^5.2.2"
-  },
-  "tshy": {
-    "dialects": [
-      "esm"
-    ],
-    "exports": {
-      "./package.json": "./package.json",
-      ".": "./src/index.ts"
-    }
-  },
-  "exports": {
-    "./package.json": "./package.json",
-    ".": {
-      "import": {
-        "types": "./dist/esm/index.d.ts",
-        "default": "./dist/esm/index.js"
-      }
-    }
-  }
+	"name": "bun-plugin-solid",
+	"description": "A plugin to compile Solid.js with Bun.",
+	"version": "1.0.0",
+	"author": {
+		"name": "Atulin"
+	},
+	"license": "MIT",
+	"type": "module",
+	"files": ["dist"],
+	"scripts": {
+		"prepare": "bun build ./src/index.ts"
+	},
+	"dependencies": {
+		"@babel/core": "^7.26.10",
+		"@babel/preset-typescript": "*7.27.0",
+		"babel-preset-solid": "*1.9.5",
+		"bun-plugin-isolated-decl": "^0.1.10"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.4",
+		"@types/babel__core": "^7.20.5",
+		"bun-types": "latest",
+		"typescript": "^5.2.2"
+	},
+	"exports": {
+		"./package.json": "./package.json",
+		".": {
+			"import": {
+				"types": "./dist/esm/index.d.ts",
+				"default": "./dist/esm/index.js"
+			}
+		}
+	}
 }
