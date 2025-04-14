@@ -1,7 +1,7 @@
 import { transformAsync } from "@babel/core";
-// @ts-expect-error - Types not important.
+// @ts-ignore
 import ts from "@babel/preset-typescript";
-// @ts-expect-error - Types not important.
+// @ts-ignore
 import solid from "babel-preset-solid";
 import type { BunPlugin } from "bun";
 
