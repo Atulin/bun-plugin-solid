@@ -23,6 +23,9 @@ export function SolidPlugin(options: SolidPluginOptions = {}): BunPlugin {
             [solid, options],
             [ts, {}],
           ],
+          generatorOpts: {
+						importAttributesKeyword: "with",
+					},
         });
 
         return {
