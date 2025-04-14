@@ -3,9 +3,7 @@
   "description": "A plugin to compile Solid.js with Bun.",
   "version": "1.0.0",
   "author": {
-    "email": "hi@daniguardio.la",
-    "name": "Dani Guardiola",
-    "url": "https://dio.la/"
+    "name": "Atulin"
   },
   "license": "MIT",
   "type": "module",
@@ -17,12 +15,12 @@
     "publish": "changeset publish"
   },
   "dependencies": {
-    "@babel/core": ">=7.0.0",
-    "@babel/preset-typescript": ">=7.0.0",
-    "babel-preset-solid": ">=1.8.0"
+    "@babel/core": "^7.26.10",
+    "@babel/preset-typescript": "*7.27.0",
+    "babel-preset-solid": "*1.9.5"
   },
   "devDependencies": {
-    "@types/babel__core": ">=7.0.0",
+    "@types/babel__core": "^7.20.5",
     "@changesets/cli": "^2.26.2",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
     "@typescript-eslint/parser": "^6.10.0",
