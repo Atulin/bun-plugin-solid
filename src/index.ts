@@ -10,7 +10,7 @@ export interface SolidPluginOptions {
 	hydratable?: boolean;
 }
 
-export function SolidPlugin(options: SolidPluginOptions = {}): BunPlugin {
+function SolidPlugin(options: SolidPluginOptions = {}): BunPlugin {
 	return {
 		name: "bun-plugin-solid",
 		setup: (build) => {
@@ -36,3 +36,6 @@ export function SolidPlugin(options: SolidPluginOptions = {}): BunPlugin {
 		},
 	};
 }
+
+export default SolidPlugin;
+export { SolidPlugin };
