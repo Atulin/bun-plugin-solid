@@ -1,5 +1,6 @@
 ﻿import { type BuildConfig, Glob } from "bun";
 import isolatedDecl from "bun-plugin-isolated-decl";
+import { convert } from "convert";
 
 const config = (min: boolean): BuildConfig => ({
 	entrypoints: ["./src/index.ts"],
@@ -16,13 +17,16 @@ for (const m of [true, false]) {
 	});
 }
 
+const size = (size: number): string =>
+	convert(size, "bytes").to("best").toString(3);
+
 for await (const file of new Glob("dist/*.js").scan()) {
 	const content = await Bun.file(file).arrayBuffer();
-	console.log(`${file} ${content.byteLength} bytes`);
+	console.log(`${file} ${size(content.byteLength)}`);
 
 	const gzipped = Bun.gzipSync(content);
-	console.log(`${file} ${gzipped.byteLength} bytes (GZIP)`);
+	console.log(`${file} ${size(gzipped.byteLength)} (GZIP)`);
 
 	const deflated = Bun.deflateSync(content);
-	console.log(`${file} ${deflated.byteLength} bytes (DEFLATE)`);
+	console.log(`${file} ${size(deflated.byteLength)} (DEFLATE)`);
 }

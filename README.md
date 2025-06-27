@@ -26,6 +26,15 @@ await Bun.build({
 });
 ```
 
+Additionally, you can pass Babel `TransformOptions`
+
+```tsx
+await Bun.build({
+  // ...
+  plugins: [SolidPlugin({ babelOptions: { plugins: [[someBabelPlugin, {}]] } })],
+});
+```
+
 ## About this plugin and motivation
 
 This plugin uses babel under the hood, which is not ideal. However, there is (currently) no clear public roadmap for proper compilation of Solid.js in Bun, so this plugin is a temporary solution for those (like me) who want to use Bun to build their Solid.js projects.
