@@ -6,7 +6,7 @@ A plugin to compile Solid.js code with Bun.
 bun add -D bun-plugin-solid
 ```
 
-```tsx
+```ts
 import { SolidPlugin } from "bun-plugin-solid";
 
 await Bun.build({
@@ -19,7 +19,7 @@ await Bun.build({
 
 All passed options are forwarded to [`babel-preset-solid`](https://www.npmjs.com/package/babel-preset-solid). For example:
 
-```tsx
+```ts
 await Bun.build({
   // ...
   plugins: [SolidPlugin({ generate: "ssr", hydratable: true })],
@@ -28,7 +28,7 @@ await Bun.build({
 
 Additionally, you can pass Babel `TransformOptions`
 
-```tsx
+```ts
 await Bun.build({
   // ...
   plugins: [SolidPlugin({ babelOptions: { plugins: [[someBabelPlugin, {}]] } })],
