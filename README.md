@@ -1,5 +1,4 @@
-[![NPM Downloads](https://img.shields.io/npm/dy/%40angius%2Fbun-plugin-solid?style=flat-square&logo=npm&labelColor=CB3837)
-](https://www.npmjs.com/package/@angius/bun-plugin-solid)
+[![NPM Downloads](https://img.shields.io/npm/dy/%40angius%2Fbun-plugin-solid?style=flat-square&logo=npm&labelColor=CB3837)](https://www.npmjs.com/package/@angius/bun-plugin-solid)
 [![JSR](https://jsr.io/badges/@atulin/bun-plugin-solid/total-downloads?style=flat-square)](https://jsr.io/@atulin/bun-plugin-solid)
 ![GitHub License](https://img.shields.io/github/license/atulin/bun-plugin-solid?style=flat-square)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/atulin/bun-plugin-solid/publish-npm.yml?style=flat-square)
