@@ -18,11 +18,15 @@ function SolidPlugin(options: SolidPluginOptions = {}): BunPlugin {
 	const baseBabelConfig: TransformOptions = {
 		babelrc: false,
 		configFile: false,
+		...babelOptions,
 		presets: [
+			...(babelOptions.presets ?? []),
 			[solid, solidOptions],
 			[ts, { isTSX: true, allExtensions: true }],
 		],
-		...babelOptions,
+		plugins: [
+			...(babelOptions.plugins ?? []),
+		],
 	};
 
 	return {
