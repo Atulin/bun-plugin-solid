@@ -6,6 +6,8 @@ const config = (min: boolean): BuildConfig => ({
 	entrypoints: ["./src/index.ts"],
 	outdir: "./dist",
 	format: "esm",
+	target: "bun",
+	external: ["@babel/core", "bun"],
 	naming: min ? "[dir]/[name].min.[ext]" : "[dir]/[name].[ext]",
 	plugins: [isolatedDecl({})],
 });

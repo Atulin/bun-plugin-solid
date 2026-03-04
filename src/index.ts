@@ -1,10 +1,7 @@
 import { type TransformOptions, transformAsync } from "@babel/core";
-// @ts-ignore
 import ts from "@babel/preset-typescript";
-// @ts-ignore
 import solid from "babel-preset-solid";
-import type { BunPlugin } from "bun";
-import { merge } from "es-toolkit";
+import type { BunPlugin, PluginBuilder } from "bun";
 
 export interface SolidPluginOptions {
 	generate?: "dom" | "ssr";
@@ -12,29 +9,52 @@ export interface SolidPluginOptions {
 	babelOptions?: TransformOptions;
 }
 
+const cache = new Map<string, { hash: number | bigint; code: string }>();
+
 function SolidPlugin(options: SolidPluginOptions = {}): BunPlugin {
+	const { babelOptions = {}, ...solidOptions } = options;
+
+	const baseBabelConfig: TransformOptions = {
+		babelrc: false,
+		configFile: false,
+		presets: [
+			[solid, solidOptions],
+			[ts, { isTSX: true, allExtensions: true }],
+		],
+		...babelOptions,
+	};
+
 	return {
 		name: "bun-plugin-solid",
-		setup: (build) => {
-			build.onLoad({ filter: /\.(js|ts)x$/ }, async (args) => {
+		setup: (build: PluginBuilder) => {
+			build.onLoad({ filter: /\.[jt]sx$/ }, async (args) => {
 				const code = await Bun.file(args.path).text();
-				const transforms = await transformAsync(
-					code,
-					merge(
-						{
-							filename: args.path,
-							presets: [
-								[solid, options],
-								[ts, {}],
-							],
-						},
-						options.babelOptions ?? {},
-					),
-				);
+
+				const currentHash = Bun.hash(code);
+				const cached = cache.get(args.path);
+
+				if (cached && cached.hash === currentHash) {
+					return {
+						contents: cached.code,
+						loader: "js",
+					};
+				}
+
+				const transforms = await transformAsync(code, {
+					...baseBabelConfig,
+					filename: args.path,
+				});
 
 				if (!transforms?.code) {
-					throw new Error("Code not generated");
+					throw new Error(
+						`Solid transformation failed for ${args.path}`,
+					);
 				}
+
+				cache.set(args.path, {
+					hash: currentHash,
+					code: transforms.code,
+				});
 
 				return {
 					contents: transforms.code,

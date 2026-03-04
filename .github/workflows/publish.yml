@@ -1,13 +1,11 @@
 name: Publish to NPM and JSR
 
-# Trigger this workflow whenever a new release is published
 on:
   workflow_dispatch:
   push:
     tags:
       - 'v*'
 
-# Grant write permissions to the repository contents so we can push version updates
 permissions:
   contents: write
 
