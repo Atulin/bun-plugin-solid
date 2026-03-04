@@ -4,6 +4,7 @@
 	"license": "MIT",
 	"exports": "./src/index.ts",
 	"imports": {
-		"@babel/core": "npm:@babel/core@^7.29.0"
+		"@babel/core": "npm:@babel/core@^7.29.0",
+		"bun": "npm:bun@^1.3.10"
 	}
 }
