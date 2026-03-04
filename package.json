@@ -24,7 +24,8 @@
 	"types": "./dist/index.d.ts",
 	"dependencies": {
 		"@babel/preset-typescript": "^7.28.5",
-		"babel-preset-solid": "^1.9.10"
+		"babel-preset-solid": "^1.9.10",
+		"bun-only": "^0.0.1"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.5",

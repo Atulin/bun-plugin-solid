@@ -2,6 +2,7 @@ import { type TransformOptions, transformAsync } from "@babel/core";
 import ts from "@babel/preset-typescript";
 import solid from "babel-preset-solid";
 import type { BunPlugin, PluginBuilder } from "bun";
+import "bun-only";
 
 export interface SolidPluginOptions {
 	generate?: "dom" | "ssr";
